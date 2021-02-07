@@ -10,16 +10,14 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "web" {
-  count         = var.servers
   ami           = var.image_id
   instance_type = "t2.micro"
-#  subnet_id     = "<subnet>"
+  subnet_id     = "subnet-025eb5dcb52def1e3" # subnet existente na VPC default da região us-east-1
 #  key_name      = "<arquivo.pem>"
 
   tags = {
     Name = "HelloWorld"
   }
-  depends_on = [ aws_instance.web ]
 }
 
 resource "aws_eip" "ip" {
