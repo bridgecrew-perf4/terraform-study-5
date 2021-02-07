@@ -19,4 +19,10 @@ resource "aws_instance" "web" {
   tags = {
     Name = "HelloWorld"
   }
+  depends_on = [ aws_instance.web ]
+}
+
+resource "aws_eip" "ip" {
+  vpc = true
+  instance = "aws_instance.web.id"
 }
